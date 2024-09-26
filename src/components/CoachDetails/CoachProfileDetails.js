@@ -554,7 +554,7 @@ const CoachProfileForm = ({ coachData = {}, onCancel }) => {
           id = decodedToken.id;
         }
 
-        const response = await axios.get(`http://localhost:5000/api/v1/coach-profile/coach/${id}`, {
+        const response = await axios.get(`https://keen-meerkat-53eff3.netlify.app/api/v1/coach-profile/coach/${id}`, {
           headers: { 'x-auth-token': localStorage.getItem('token') }
         });
 
@@ -622,7 +622,7 @@ const CoachProfileForm = ({ coachData = {}, onCancel }) => {
       const token = localStorage.getItem('token');
 
       const updateProfileResponse = await axios.put(
-        `http://localhost:5000/api/v1/coach-profile/${formData.CoachProfileId}`,
+        `https://keen-meerkat-53eff3.netlify.app/api/v1/coach-profile/${formData.CoachProfileId}`,
         formData,
         { headers: { 'x-auth-token': token } }
       );
@@ -634,7 +634,7 @@ const CoachProfileForm = ({ coachData = {}, onCancel }) => {
         formDataImage.append('image', formData.coachImage);
 
         const imageUploadResponse = await axios.put(
-          `http://localhost:5000/api/v1/coach-profile/update-image/${formData.CoachProfileId}`,
+          `https://keen-meerkat-53eff3.netlify.app/api/v1/coach-profile/update-image/${formData.CoachProfileId}`,
           formDataImage,
           {
             headers: {

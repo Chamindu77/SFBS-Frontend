@@ -312,7 +312,7 @@ const TableComponent = () => {
     useEffect(() => {
         const fetchSessionRequests = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/v1/session/coach/requests', {
+                const response = await axios.get('https://keen-meerkat-53eff3.netlify.app/api/v1/session/coach/requests', {
                     headers: {
                         'x-auth-token': localStorage.getItem('token'),
                     },
@@ -373,7 +373,7 @@ const TableComponent = () => {
         try {
             const formattedTimeSlot = convertTimeSlotTo24HourFormat(request.requestedTimeSlots[0].timeSlot);
 
-            const response = await axios.post('http://localhost:5000/api/v1/facility-booking/available-facilities', {
+            const response = await axios.post('https://keen-meerkat-53eff3.netlify.app/api/v1/facility-booking/available-facilities', {
                 sportName: request.sportName,
                 date: formatDate(request.requestedTimeSlots[0].date),
                 timeSlot: formattedTimeSlot,
@@ -398,7 +398,7 @@ const TableComponent = () => {
     const handleReject = async (request) => {
         try {
             const response = await axios.put(
-                `http://localhost:5000/api/v1/session/respond/${request._id}`,
+                `https://keen-meerkat-53eff3.netlify.app/api/v1/session/respond/${request._id}`,
                 {
                     status: 'Rejected',
                 },

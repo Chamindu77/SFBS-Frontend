@@ -295,7 +295,7 @@ const CourtSelectionModal = ({ isOpen, availableFacilities, userDetails, selecte
         formData.append('receipt', receiptFile);
 
         try {
-            const response = await axios.post('http://localhost:5000/api/v1/facility-booking/', formData, {
+            const response = await axios.post('https://keen-meerkat-53eff3.netlify.app/api/v1/facility-booking/', formData, {
                 headers: {
                     'x-auth-token': localStorage.getItem('token'),
                     'Content-Type': 'multipart/form-data',
@@ -324,7 +324,7 @@ const CourtSelectionModal = ({ isOpen, availableFacilities, userDetails, selecte
     
         try {
             const response = await axios.put(
-                `http://localhost:5000/api/v1/session/respond/${selectedRequest._id}`,
+                `https://keen-meerkat-53eff3.netlify.app/api/v1/session/respond/${selectedRequest._id}`,
                 {
                     status: 'Accepted',
                     courtNo: selectedCourt.courtNumber,

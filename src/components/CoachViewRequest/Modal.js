@@ -107,7 +107,7 @@ const Modal = ({ isOpen, onClose, onConfirm, selectedRequest }) => {
 
         try {
             const response = await axios.put(
-                `http://localhost:5000/api/v1/session/respond/${selectedRequest._id}`,
+                `https://keen-meerkat-53eff3.netlify.app/api/v1/session/respond/${selectedRequest._id}`,
                 {
                     status: 'Accepted',
                     courtNo: courtNumber, // Use the selected court number from state
