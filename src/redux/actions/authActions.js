@@ -53,7 +53,7 @@ export const register = (name, email, password, role) => async (dispatch) => {
   const body = JSON.stringify({ name, email, password, role });
 
   try {
-    const res = await axios.post('https://keen-meerkat-53eff3.netlify.app/api/v1/auth/register', body, config);
+    const res = await axios.post('https://sfbs-backend.vercel.app/api/v1/auth/register', body, config);
 
     dispatch({
       type: REGISTER_SUCCESS,

@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 export const fetchAvailableEquipment = () => async (dispatch) => {
   try {
-    const res = await axios.get('https://keen-meerkat-53eff3.netlify.app/api/v1/equipment/available', {
+    const res = await axios.get('https://sfbs-backend.vercel.app/api/v1/equipment/available', {
       headers: {
         'x-auth-token': localStorage.getItem('token'),
       },

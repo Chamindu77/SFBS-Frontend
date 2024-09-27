@@ -12,7 +12,7 @@ export const createEquipmentBooking = (formData, navigate) => async (dispatch) =
       },
     };
 
-    const res = await axios.post('https://keen-meerkat-53eff3.netlify.app/api/v1/equipment-booking/', formData, config);
+    const res = await axios.post('https://sfbs-backend.vercel.app/api/v1/equipment-booking/', formData, config);
 
     dispatch({
       type: CREATE_EQUIPMENT_BOOKING_SUCCESS,

@@ -504,7 +504,7 @@ const RegisterCoachProfileForm = ({ onCancel }) => {
       const token = localStorage.getItem('token');
 
       const createProfileResponse = await axios.post(
-        'https://keen-meerkat-53eff3.netlify.app/api/v1/coach-profile/',
+        'https://sfbs-backend.vercel.app/api/v1/coach-profile/',
         {
           coachName: values.coachName,
           coachLevel: values.coachLevel,
@@ -526,7 +526,7 @@ const RegisterCoachProfileForm = ({ onCancel }) => {
         formDataImage.append('image', values.coachImage);
 
         await axios.post(
-          `https://keen-meerkat-53eff3.netlify.app/api/v1/coach-profile/upload-image`,
+          `https://sfbs-backend.vercel.app/api/v1/coach-profile/upload-image`,
           formDataImage,
           {
             headers: {

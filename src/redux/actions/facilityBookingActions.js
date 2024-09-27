@@ -10,7 +10,7 @@ import {
 
 export const createFacilityBooking = (formData, navigate) => async (dispatch) => {
   try {
-    const res = await axios.post('https://keen-meerkat-53eff3.netlify.app/api/v1/facility-booking', formData, {
+    const res = await axios.post('https://sfbs-backend.vercel.app/api/v1/facility-booking', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
         'x-auth-token': localStorage.getItem('token'),  
@@ -40,7 +40,7 @@ export const createFacilityBooking = (formData, navigate) => async (dispatch) =>
 
 export const fetchAvailableSlots = (courtNumber, date, sportName) => async (dispatch) => {
   try {
-    const res = await axios.post('http://localhost:5000/api/v1/facility-booking/available-slots', {
+    const res = await axios.post('https://sfbs-backend.vercel.app/api/v1/facility-booking/available-slots', {
       courtNumber,
       date,
       sportName

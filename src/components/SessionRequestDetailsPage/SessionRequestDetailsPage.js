@@ -31,7 +31,7 @@ const SessionRequestDetailsPage = () => {
         const userId = decodedToken.id
 
         const response = await axios.get(
-          `https://keen-meerkat-53eff3.netlify.app/api/v1/session/requests/${userId}`,
+          `https://sfbs-backend.vercel.app/api/v1/session/requests/${userId}`,
           {
             headers: { 'x-auth-token': token },
           }

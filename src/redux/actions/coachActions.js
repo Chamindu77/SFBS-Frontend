@@ -32,7 +32,7 @@ export const fetchCoachProfileById = (id) => async (dispatch, getState) => {
       },
     };
 
-    const res = await axios.get(`https://keen-meerkat-53eff3.netlify.app/api/v1/coach-profile/${id}`, config);
+    const res = await axios.get(`https://sfbs-backend.vercel.app/api/v1/coach-profile/${id}`, config);
 
     dispatch({
       type: FETCH_COACH_PROFILE_BY_ID,

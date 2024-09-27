@@ -56,7 +56,7 @@ const BookingDetailsModal = ({ booking, onClose }) => {
         try {
             setIsSubmitting(true);
 
-            const response = await fetch(`https://keen-meerkat-53eff3.netlify.app/api/v1/session/upload-receipt/${booking._id}`, {
+            const response = await fetch(`https://sfbs-backend.vercel.app/api/v1/session/upload-receipt/${booking._id}`, {
                 method: 'POST',
                 headers: {
                     'x-auth-token': localStorage.getItem('token'),
@@ -90,7 +90,7 @@ const BookingDetailsModal = ({ booking, onClose }) => {
             setIsBooking(true);
     
             // Book the session
-            const response = await fetch('https://keen-meerkat-53eff3.netlify.app/api/v1/session/booking', {
+            const response = await fetch('https://sfbs-backend.vercel.app/api/v1/session/booking', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -106,7 +106,7 @@ const BookingDetailsModal = ({ booking, onClose }) => {
                 toast.success('Session booked successfully!');
     
                 // After successful booking, update the status to "Booked"
-                const statusResponse = await fetch(`https://keen-meerkat-53eff3.netlify.app/api/v1/session/respond/${booking._id}`, {
+                const statusResponse = await fetch(`https://sfbs-backend.vercel.app/api/v1/session/respond/${booking._id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
