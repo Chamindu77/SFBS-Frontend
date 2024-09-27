@@ -90,7 +90,7 @@ export const login = (email, password) => async (dispatch) => {
   const body = JSON.stringify({ email, password});
 
   try {
-    const res = await axios.post('https://sfbs-backend.vercel.app/api/v1/auth/login', body, config);
+    const res = await axios.post('https://sfbs-backend-bxu9w3s7d-chamindu-nipuns-projects.vercel.app/api/v1/auth/login', body, config);
 
     
     const decoded = jwtDecode(res.data.token);
