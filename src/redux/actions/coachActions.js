@@ -11,7 +11,7 @@ export const fetchCoachProfiles = () => async (dispatch, getState) => {
       },
     };
 
-    const res = await axios.get('https://keen-meerkat-53eff3.netlify.app/api/v1/coach-profile/all', config);
+    const res = await axios.get('https://sfbs-backend.vercel.app/api/v1/coach-profile/all', config);
 
     dispatch({
       type: FETCH_COACH_PROFILES,
