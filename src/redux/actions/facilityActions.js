@@ -8,6 +8,7 @@ export const fetchAvailableFacilities = () => async (dispatch) => {
       headers: {
         'x-auth-token': localStorage.getItem('token'),
       },
+      withCredentials: true
     });
 
     dispatch({
