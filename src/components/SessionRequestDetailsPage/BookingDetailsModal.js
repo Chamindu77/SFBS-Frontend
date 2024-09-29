@@ -60,7 +60,7 @@ const BookingDetailsModal = ({ booking, onClose }) => {
                 method: 'POST',
                 headers: {
                     'x-auth-token': localStorage.getItem('token'),
-                    'Cache-Control': 'no-cache', 
+                     
                 },
                 body: formData,
             });
