@@ -483,7 +483,7 @@ const RegisterCoachProfileForm = ({ onCancel }) => {
   };
 
   const addTimeSlot = (availableTimeSlots, setFieldValue) => {
-    if (availableTimeSlots.length >= 5) {
+    if (availableTimeSlots.length >= 3) {
       toast.error('You can only add up to 5 time slots.');
       return;
     }
