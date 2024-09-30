@@ -595,7 +595,7 @@ const CoachProfileForm = ({ coachData = {}, onCancel }) => {
 
   const addTimeSlot = () => {
     const totalSlots = formData.availableTimeSlots.length + timeSlotsFromBackend.length;
-    if (totalSlots >= 5) {
+    if (totalSlots >= 3) {
       toast.error('You can only add up to 5 time slots.');
       return;
     }
