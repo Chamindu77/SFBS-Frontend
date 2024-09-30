@@ -402,6 +402,9 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';  // Import ToastContainer and toast
 import 'react-toastify/dist/ReactToastify.css';  // Import the styles for react-toastify
+import Navbar from '../Layout/Navbar';
+import Footer from '../Layout/Footer';
+
 
 // Define Yup validation schema
 const validationSchema = Yup.object().shape({
@@ -560,7 +563,9 @@ const RegisterCoachProfileForm = ({ onCancel }) => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div>
+      <Navbar />
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 p-8">
       <Formik
         initialValues={defaultData}
         validationSchema={validationSchema}
@@ -787,6 +792,8 @@ const RegisterCoachProfileForm = ({ onCancel }) => {
         )}
       </Formik>
       <ToastContainer /> {/* Add ToastContainer */}
+    </div>
+    <Footer/>
     </div>
   );
 };
