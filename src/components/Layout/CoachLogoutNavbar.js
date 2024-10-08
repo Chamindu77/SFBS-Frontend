@@ -162,6 +162,7 @@ const LogoutNavbar = ({ logout }) => {
                             )}
                         </li>
                         <li><Link to="/sportcategory" className="text-gray-800 font-bold hover:text-custom-hover">Facility</Link></li>
+                        <li><Link to="/equipment" className="text-gray-800 font-bold hover:text-custom-hover">Equipment</Link></li>
                         <li><Link to="/about" className="text-gray-800 font-bold hover:text-custom-hover">About Us</Link></li>
                     </ul>
                 </div>

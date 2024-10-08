@@ -6,9 +6,26 @@ import LogoutNavbar from '../Layout/LogoutNavbar';
 import FilterSection from './FilterSection';
 import EquipmentList from './EquipmentList';
 import MessiHero from '../../assets/image-hero-sportcategorypage.jpg';
-
+import { jwtDecode } from 'jwt-decode';
+import CoachLogoutNavbar from '../Layout/CoachLogoutNavbar';
+import Navbar from '../Layout/Navbar';
+import CoachNavbar from '../Layout/CoachNavbar';
+import DefNavbar from '../Layout/DefNavbar';
 
 const EquipmentPage = ({ fetchAvailableEquipment, availableEquipment  }) => {
+  const token = localStorage.getItem('token');
+  const isLoggedIn = !!token;
+
+  let role = null;
+  if (isLoggedIn && token) {
+    try {
+      const decodedToken = jwtDecode(token);
+      role = decodedToken.role;
+    } catch (error) {
+      console.error('Error decoding token', error);
+    }
+  }
+
   const [selectedSport, setSelectedSport] = useState(null);
   const [filteredEquipment, setFilteredEquipment] = useState([]);
 
@@ -47,7 +64,11 @@ const EquipmentPage = ({ fetchAvailableEquipment, availableEquipment  }) => {
 
   return (
     <div>
-      <LogoutNavbar />
+      {/* Navbar based on role */}
+      {role === 'User' && (isLoggedIn ? <LogoutNavbar /> : <Navbar />)}
+      {role === 'Coach' && (isLoggedIn ? <CoachLogoutNavbar /> : <CoachNavbar />)}
+      {!role && <DefNavbar />} {/* Default Navbar if no role is found */}
+
       <div className="bg-gray-100 min-h-screen p-6">
         <div
           className="relative bg-cover bg-center text-white p-24 rounded-lg shadow-md mb-8"

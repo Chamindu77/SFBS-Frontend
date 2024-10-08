@@ -11,8 +11,25 @@ import Footer from '../Layout/Footer';
 import UserDetails from './UserDetails';
 import BookingDetails from './BookingDetails';
 import PaymentDetails from './PaymentDetails';
+import CoachLogoutNavbar from '../Layout/CoachLogoutNavbar';
+import Navbar from '../Layout/Navbar';
+import CoachNavbar from '../Layout/CoachNavbar';
+import DefNavbar from '../Layout/DefNavbar';
+
 
 const FacilityBookingPage = ({ createFacilityBooking, fetchAvailableSlots, availableSlots }) => {
+  const token = localStorage.getItem('token');
+  const isLoggedIn = !!token;
+
+  let role = null;
+  if (isLoggedIn && token) {
+    try {
+      const decodedToken = jwtDecode(token);
+      role = decodedToken.role;
+    } catch (error) {
+      console.error('Error decoding token', error);
+    }
+  }
   const location = useLocation();
   const navigate = useNavigate();
   const { courtNumber, sportName, sportCategory, courtPrice, image } = location.state || {};
@@ -104,7 +121,11 @@ const FacilityBookingPage = ({ createFacilityBooking, fetchAvailableSlots, avail
 
   return (
     <div>
-      <LogoutNavbar/>
+      {/* Navbar based on role */}
+      {role === 'User' && (isLoggedIn ? <LogoutNavbar /> : <Navbar />)}
+      {role === 'Coach' && (isLoggedIn ? <CoachLogoutNavbar /> : <CoachNavbar />)}
+      {!role && <DefNavbar />} {/* Default Navbar if no role is found */}
+
       <div className="min-h-min p-2 bg-gray-100 flex justify-center items-center">
         <div className="bg-white p-2 mb-2 rounded-lg shadow-lg w-1/2 items-center max-w-5xl flex">
           <div className="w-1/2 flex-shrink-0 pr-6">
