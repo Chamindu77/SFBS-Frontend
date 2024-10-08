@@ -182,14 +182,14 @@ const Registration = ({ register }) => {
             <div className="md:w-1/2 p-6">
               <h2 className="text-2xl font-bold mb-5 text-center">Sign Up</h2>
               <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="mb-4 relative">
+              <div className="mb-4 relative">
                   <label className="block text-sm mb-1 font-normal">Role</label>
                   <select
                     name="role"
                     {...formRegister('role')}
                     className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-200 ${errors.role ? 'border-red-500' : ''}`}
                   >
-                    <option value="">Select Role</option>
+                    <option value="" disabled selected hidden>Select Role</option>
                     <option value="User">User</option>
                     <option value="Coach">Coach</option>
                   </select>
