@@ -58,7 +58,7 @@ const Navbar = () => {
                                         to="/coach-view-booked-request"
                                         className="block px-4 py-2 text-gray-800 hover:text-custom-hover hover:bg-gray-100"
                                     >
-                                        Booked
+                                        Booking
                                     </Link>
                                 </li>
                                 
