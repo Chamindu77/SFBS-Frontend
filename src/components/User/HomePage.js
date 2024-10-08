@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; 
 import Navbar from '../Layout/Navbar';
 import Footer from '../Layout/Footer';
 import LogoutNavbar from '../Layout/LogoutNavbar';
@@ -17,6 +17,7 @@ import 'aos/dist/aos.css';
 import DefNavbar from '../Layout/DefNavbar';
 
 const HomePage = () => {
+  const navigate = useNavigate();
   const token = localStorage.getItem('token');
   const isLoggedIn = !!token;
 
@@ -50,11 +51,17 @@ const HomePage = () => {
             Dream Sport Facilities Booking
           </h1>
           {isLoggedIn ? (
-            <button className="bg-gradient-to-r from-blue-500 to-green-500 hover:from-green-500 hover:to-blue-500 text-white font-bold py-3 px-10 rounded-full shadow-md hover:shadow-lg transition duration-300 mt-4">
-              Explore Now <FaRegArrowAltCircleRight className="inline ml-2" />
+            <button
+              className="bg-gradient-to-r from-blue-500 to-green-500 hover:from-green-500 hover:to-blue-500 text-white font-bold py-3 px-10 rounded-full shadow-md hover:shadow-lg transition duration-300 mt-4"
+              onClick={() => navigate('/about')} // Navigate to 'explore' page
+            >
+              Dream Sport <FaRegArrowAltCircleRight className="inline ml-2" />
             </button>
           ) : (
-            <button className="bg-gradient-to-r from-blue-500 to-green-500 hover:from-green-500 hover:to-blue-500 text-white font-bold py-3 px-10 rounded-full shadow-md hover:shadow-lg transition duration-300 mt-4">
+            <button
+              className="bg-gradient-to-r from-blue-500 to-green-500 hover:from-green-500 hover:to-blue-500 text-white font-bold py-3 px-10 rounded-full shadow-md hover:shadow-lg transition duration-300 mt-4"
+              onClick={() => navigate('/register')} // Navigate to 'register' page
+            >
               Register Now <FaRegArrowAltCircleRight className="inline ml-2" />
             </button>
           )}
