@@ -73,8 +73,17 @@ const EquipmentBookingPage = ({ createEquipmentBooking }) => {
     },
     validationSchema: Yup.object({
       phoneNumber: Yup.string()
-        .matches(/^[0-9]{10}$/, 'Phone number must be exactly 10 digits')
-        .required('Phone number is required'),
+      .test(
+        'valid-start',
+        'Phone number must start with + followed by country code or 0',
+        (value) => /^(\+?\d{1,4}|0)/.test(value) // Check if it starts with +country code or 0
+      )
+      .test(
+        'valid-length',
+        'Phone number must be followed by exactly 9 digits after the country code or 0',
+        (value) => /^(\+?\d{1,4}|0)\d{9}$/.test(value) // Ensure there are 9 digits after the prefix
+      )
+      .required('Phone number is required'),
       paymentReceipt: Yup.mixed()
         .required('Payment receipt is required')
         .test('fileSize', 'File too large', value => !value || (value && value.size <= 5 * 1024 * 1024))

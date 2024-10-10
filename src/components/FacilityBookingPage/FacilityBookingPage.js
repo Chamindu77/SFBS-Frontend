@@ -37,7 +37,7 @@ const FacilityBookingPage = ({ createFacilityBooking, fetchAvailableSlots, avail
   const [bookingDate, setBookingDate] = useState(null);
   const [selectedTimeSlots, setSelectedTimeSlots] = useState([]);
   const [totalPayment, setTotalPayment] = useState(0);
-  const [isSubmitting, setIsSubmitting] = useState(false); 
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -75,7 +75,16 @@ const FacilityBookingPage = ({ createFacilityBooking, fetchAvailableSlots, avail
     },
     validationSchema: Yup.object({
       phoneNumber: Yup.string()
-        .matches(/^[0-9]{10}$/, 'Phone number must be exactly 10 digits')
+        .test(
+          'valid-start',
+          'Phone number must start with + followed by country code or 0',
+          (value) => /^(\+?\d{1,4}|0)/.test(value) // Check if it starts with +country code or 0
+        )
+        .test(
+          'valid-length',
+          'Phone number must be followed by exactly 9 digits after the country code or 0',
+          (value) => /^(\+?\d{1,4}|0)\d{9}$/.test(value) // Ensure there are 9 digits after the prefix
+        )
         .required('Phone number is required'),
       paymentReceipt: Yup.mixed()
         .required('Payment receipt is required')
@@ -100,12 +109,12 @@ const FacilityBookingPage = ({ createFacilityBooking, fetchAvailableSlots, avail
       formData.append('timeSlots', JSON.stringify(selectedTimeSlots));
       formData.append('receipt', values.paymentReceipt);
 
-      setIsSubmitting(true); 
+      setIsSubmitting(true);
 
       try {
         await createFacilityBooking(formData, navigate);
       } catch (err) {
-        setIsSubmitting(false); 
+        setIsSubmitting(false);
         if (err.response && err.response.status === 400) {
           setErrors({ general: err.response.data.msg });
         } else {
@@ -162,12 +171,11 @@ const FacilityBookingPage = ({ createFacilityBooking, fetchAvailableSlots, avail
                 </button>
                 <button
                   type="submit"
-                  disabled={isSubmitting} 
-                  className={`py-2 px-4 rounded-lg text-sm font-semibold transition duration-300 ${
-                    isSubmitting
+                  disabled={isSubmitting}
+                  className={`py-2 px-4 rounded-lg text-sm font-semibold transition duration-300 ${isSubmitting
                       ? 'bg-red-500 text-white cursor-not-allowed'
                       : 'bg-teal-700 hover:bg-teal-800 text-white'
-                  }`}
+                    }`}
                 >
                   {isSubmitting ? 'Booking...' : 'Confirm Booking'}
                 </button>
@@ -176,7 +184,7 @@ const FacilityBookingPage = ({ createFacilityBooking, fetchAvailableSlots, avail
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
@@ -275,7 +283,7 @@ export default connect(mapStateToProps, { createFacilityBooking, fetchAvailableS
 //       formData.append('receipt', values.paymentReceipt);
 
 //       try {
-//         await createFacilityBooking(formData, navigate); 
+//         await createFacilityBooking(formData, navigate);
 //       } catch (err) {
 //         if (err.response && err.response.status === 400) {
 //           setErrors({ general: err.response.data.msg });
