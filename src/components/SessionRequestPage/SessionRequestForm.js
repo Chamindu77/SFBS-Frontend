@@ -44,7 +44,7 @@ const SessionRequestForm = ({
         onChange={handleSessionTypeChange}
         required
       >
-        <option value="">Select Session</option>
+        <option value="" disabled selected hidden>Select Session</option>
         {coach.offerSessions.map((session, index) => (
           <option key={index} value={session}>
             {session}
@@ -58,7 +58,7 @@ const SessionRequestForm = ({
         onChange={handleTimeSlotChange}
         required
       >
-        <option value="">Select Time Slot</option>
+        <option value="" disabled selected hidden>Select Time Slot</option>
         {coach.availableTimeSlots.map((slot) => (
           <option key={slot._id} value={slot._id}>
             {new Date(slot.date).toLocaleDateString()} - {slot.timeSlot}

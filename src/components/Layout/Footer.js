@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
@@ -8,28 +9,25 @@ const Footer = () => {
                     <div>
                         <h3 className="text-lg font-semibold mb-3 text-slate-200">Our Services</h3>
                         <ul className="space-y-2">
-                            <li><a href="/sportcategory" className="hover:underline text-slate-300">Facility Booking</a></li>
-                            <li><a href="/equipment" className="hover:underline text-slate-300">Equipment Booking</a></li>
-                            <li><a href="/coach-page" className="hover:underline text-slate-300">Session Booking</a></li>
-                            <li><a href="/coach-page" className="hover:underline text-slate-300">Trained consultants</a></li>
+                            <li><Link to="/sportcategory" className="hover:underline text-slate-300">Facility Booking</Link></li>
+                            <li><Link to="/equipment" className="hover:underline text-slate-300">Equipment Booking</Link></li>
+                            <li><Link to="/coach-page" className="hover:underline text-slate-300">Session Booking</Link></li>
                         </ul>
                     </div>
                     <div>
                         <h3 className="text-lg font-semibold mb-3 text-slate-200">Company</h3>
                         <ul className="space-y-2">
-                            <li><a href="/#" className="hover:underline text-slate-300">Careers</a></li>
-                            <li><a href="/#" className="hover:underline text-slate-300">About Us</a></li>
-                            <li><a href="/#" className="hover:underline text-slate-300">Our Teams</a></li>
-                            <li><a href="/#" className="hover:underline text-slate-300">Customer Help</a></li>
+                            <li className="hover:underline text-slate-300">Career</li>
+                            <li className="hover:underline text-slate-300">About Us</li>
+                            <li className="hover:underline text-slate-300">Our Teams</li>
                         </ul>
                     </div>
                     <div>
                         <h3 className="text-lg text-slate-200 font-semibold mb-3">Legal</h3>
                         <ul className="space-y-2">
-                            <li><a href="/#" className="hover:underline text-slate-300">Galle, Sri Lanka</a></li>
+                            <li className="hover:underline text-slate-300">Galle, Sri Lanka</li>
                             <li><a href="mailto:info@dreamsport.com" className='text-slate-300'>info@dreamsport.com</a></li>
-                            <li><a href="/#" className="hover:underline text-slate-300">+94 77 123 4567</a></li>
-                            <li><a href="/#" className="hover:underline text-slate-300">+94 77 123 4567</a></li>
+                            <li className="hover:underline text-slate-300">+94 77 123 4567</li>
                         </ul>
                     </div>
                     <div>
@@ -38,7 +36,6 @@ const Footer = () => {
                             <input type="email" placeholder="Enter your email address" className="px-4 py-2 mb-2 sm:mb-0 sm:mr-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-600 text-gray-800 w-full sm:w-auto" />
                             <button className="bg-teal-700 text-white py-2 px-4 rounded-md hover:bg-teal-800 w-full sm:w-auto">Subscribe</button>
                         </form>
-                       
                         <h3 className="text-lg font-semibold mt-6 mb-3 text-slate-200">Contact Us</h3>
                         <div className="flex space-x-4 text-xl">
                             <a href="https://www.facebook.com" className="hover:text-teal-500">

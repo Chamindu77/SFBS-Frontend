@@ -105,12 +105,7 @@ const AboutPage = () => {
                             <p className="text-lg text-gray-700 mb-6 leading-relaxed">
                                 At Dream Sport, our team is passionate about sports and fitness. Comprised of experienced professionals, coaches, and enthusiasts, we work together to provide the best possible experience for our users. Our team is here to help you achieve your goals and unlock your full potential.
                             </p>
-                            <a
-                                href="/team"
-                                className="inline-block bg-blue-600 text-white py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-blue-300"
-                            >
-                                Learn More About Us
-                            </a>
+                            
                         </div>
                     </div>
                 </div>
