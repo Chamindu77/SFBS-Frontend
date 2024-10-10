@@ -168,7 +168,7 @@ const LogoutNavbar = ({ logout }) => {
                             {isServicesDropdownOpen && (
                                 <ul className="absolute left-0 mt-2 bg-white border rounded shadow-lg p-2 z-10">
                                     <li><Link to="/coach-view-request" className="block px-4 py-2 text-gray-800 hover:text-custom-hover hover:bg-gray-100">Request</Link></li>
-                                    <li><Link to="/coach-view-booked-request" className="block px-4 py-2 text-gray-800 hover:text-custom-hover hover:bg-gray-100">Booked</Link></li>
+                                    <li><Link to="/coach-view-booked-request" className="block px-4 py-2 text-gray-800 hover:text-custom-hover hover:bg-gray-100">Booking</Link></li>
                                 </ul>
                             )}
                         </li>

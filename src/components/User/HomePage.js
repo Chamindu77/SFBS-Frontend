@@ -16,6 +16,7 @@ import CoachLogoutNavbar from '../Layout/CoachLogoutNavbar';
 import 'aos/dist/aos.css';
 import DefNavbar from '../Layout/DefNavbar';
 
+
 const HomePage = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
@@ -34,6 +35,16 @@ const HomePage = () => {
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
   }, []);
+
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      window.scrollTo({
+        top: section.offsetTop - 80, // Adjust the offset for navbar height
+        behavior: 'smooth',
+      });
+    }
+  };
 
   return (
     <div className="font-sans">
@@ -80,7 +91,8 @@ const HomePage = () => {
             <FaRunning className="text-6xl text-teal-600 mb-4 mx-auto" />
             <h3 className="text-2xl font-bold mb-2">Facility Booking</h3>
             <p className="text-gray-600 mb-4">Reserve world-class athletic venues effortlessly for your sports activities.</p>
-            <button className="bg-teal-600 text-white px-4 py-2 rounded-full transition duration-300 hover:bg-teal-800">
+            <button className="bg-teal-600 text-white px-4 py-2 rounded-full transition duration-300 hover:bg-teal-800"
+            onClick={() => scrollToSection('facility-booking')}>
               Learn More
             </button>
           </div>
@@ -90,7 +102,8 @@ const HomePage = () => {
             <FaBasketballBall className="text-6xl text-teal-600 mb-4 mx-auto" />
             <h3 className="text-2xl font-bold mb-2">Sport Items Rental</h3>
             <p className="text-gray-600 mb-4">Lease premium athletic gear tailored to your specific requirements.</p>
-            <button className="bg-teal-600 text-white px-4 py-2 rounded-full transition duration-300 hover:bg-teal-800">
+            <button className="bg-teal-600 text-white px-4 py-2 rounded-full transition duration-300 hover:bg-teal-800"
+            onClick={() => scrollToSection('equipment-rental')}>
               Learn More
             </button>
           </div>
@@ -100,7 +113,8 @@ const HomePage = () => {
             <FaChalkboardTeacher className="text-6xl text-teal-600 mb-4 mx-auto" />
             <h3 className="text-2xl font-bold mb-2">Coaching Session Booking</h3>
             <p className="text-gray-600 mb-4">Book sessions with expert coaches to elevate your game.</p>
-            <button className="bg-teal-600 text-white px-4 py-2 rounded-full transition duration-300 hover:bg-teal-800">
+            <button className="bg-teal-600 text-white px-4 py-2 rounded-full transition duration-300 hover:bg-teal-800"
+            onClick={() => scrollToSection('coaching-sessions')}>
               Learn More
             </button>
           </div>
@@ -110,7 +124,7 @@ const HomePage = () => {
       {/* New Service Section */}
       <div className="bg-white py-16 px-8 md:px-16 lg:px-32">
         {/* Section Title */}
-        <div className="text-center mb-8" data-aos="fade-up">
+        <div id="coaching-sessions" className="text-center mb-8" data-aos="fade-up">
           <h2 className="text-3xl font-bold tracking-tight mb-2 text-gray-900">
             Elevate Your <span className="text-yellow-600">Performance</span>
           </h2>
@@ -164,7 +178,7 @@ const HomePage = () => {
       </div>
 
       {/* Facility Booking Section */}
-      <div className="bg-slate-200 py-16 px-8 md:px-16 lg:px-32">
+      <div  id="facility-booking" className="bg-slate-200 py-16 px-8 md:px-16 lg:px-32">
         {/* Section Title */}
         <div className="text-center mb-8" data-aos="fade-up">
           <h2 className="text-3xl font-bold tracking-tight mb-2 text-gray-900">
@@ -210,7 +224,7 @@ const HomePage = () => {
       </div>
 
       {/* Sports Gear Rental Section */}
-      <div className="bg-gray-50 py-16 px-8 md:px-16 lg:px-32">
+      <div id="equipment-rental" className="bg-gray-50 py-16 px-8 md:px-16 lg:px-32">
         {/* Section Title */}
         <div className="text-center mb-12" data-aos="fade-up">
           <h2 className="text-3xl font-bold tracking-tight mb-2 text-gray-900">
