@@ -26,7 +26,11 @@ const Login = ({ login }) => {
   });
 
   const onSubmit = (data) => {
-    login(data.email, data.password,  toast);
+    login(data.email, data.password, toast);
+  };
+
+  const googleLogin = () => {
+    window.open('http://localhost:5000/api/v1/auth/google', '_self');
   };
 
   return (
@@ -68,9 +72,8 @@ const Login = ({ login }) => {
                   <input
                     type="email"
                     {...register("email")}
-                    className={`w-full px-3 py-2 border ${
-                      errors.email ? 'border-red-500' : 'border-gray-300'
-                    } rounded-md focus:outline-none focus:ring-2 focus:ring-slate-200`}
+                    className={`w-full px-3 py-2 border ${errors.email ? 'border-red-500' : 'border-gray-300'
+                      } rounded-md focus:outline-none focus:ring-2 focus:ring-slate-200`}
                     placeholder="Email Address"
                   />
                   {errors.email && (
@@ -82,9 +85,8 @@ const Login = ({ login }) => {
                   <input
                     type="password"
                     {...register("password")}
-                    className={`w-full px-3 py-2 border ${
-                      errors.password ? 'border-red-500' : 'border-gray-300'
-                    } rounded-md focus:outline-none focus:ring-2 focus:ring-slate-200`}
+                    className={`w-full px-3 py-2 border ${errors.password ? 'border-red-500' : 'border-gray-300'
+                      } rounded-md focus:outline-none focus:ring-2 focus:ring-slate-200`}
                     placeholder="Password"
                   />
                   {errors.password && (
@@ -97,8 +99,19 @@ const Login = ({ login }) => {
                 >
                   LOGIN
                 </button>
-                <div className="flex justify-center mt-3">
+                {/* <div className="flex justify-center mt-3">
                   <button className="flex items-center justify-center w-full bg-white text-gray-600 border border-gray-300 py-1.5 rounded-md shadow hover:bg-gray-100">
+                    <img src={googleLogo} alt="Google logo" className="h-5 mr-2" />
+                    <span className="font-medium">Sign in with Google</span>
+                  </button>
+                </div> */}
+                
+              </form>
+              <div className="flex justify-center mt-3">
+                  <button
+                    onClick={googleLogin}
+                    className="flex items-center justify-center w-full bg-white text-gray-600 border border-gray-300 py-1.5 rounded-md shadow hover:bg-gray-100"
+                  >
                     <img src={googleLogo} alt="Google logo" className="h-5 mr-2" />
                     <span className="font-medium">Sign in with Google</span>
                   </button>
@@ -108,8 +121,8 @@ const Login = ({ login }) => {
                   <Link to="/register" className="text-teal-600 hover:underline">
                     Create Account
                   </Link>
-                </p> 
-              </form>
+                </p>
+
             </div>
           </div>
         </div>
@@ -121,6 +134,9 @@ const Login = ({ login }) => {
 
 export default connect(null, { login })(Login);
 
+
+
+
 // import React from 'react';
 // import { useForm } from 'react-hook-form';
 // import { yupResolver } from '@hookform/resolvers/yup';
@@ -129,9 +145,10 @@ export default connect(null, { login })(Login);
 // import { login } from '../../redux/actions/authActions';
 // import { ToastContainer, toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
-// import { Link } from 'react-router-dom'; 
+// import { Link } from 'react-router-dom'; // Importing Link from react-router-dom
 // import loginImage from "../../assets/image-login.jpg";
 // import googleLogo from "../../assets/google-logo.png";
+// //import Navbar from "../Layout/Navbar";
 // import Footer from "../Layout/Footer";
 // import DefNavbar from '../Layout/DefNavbar';
 
@@ -139,6 +156,7 @@ export default connect(null, { login })(Login);
 // const schema = yup.object().shape({
 //   email: yup.string().email('Invalid email format').required('Email is required'),
 //   password: yup.string().min(6, 'At least 6 characters').required('Password is required'),
+//   // role: yup.string().oneOf(['User', 'Coach'], 'Invalid role').required('Role is required'),
 // });
 
 // const Login = ({ login }) => {
@@ -147,12 +165,7 @@ export default connect(null, { login })(Login);
 //   });
 
 //   const onSubmit = (data) => {
-//     login(data.email, data.password, toast);
-//   };
-
-//   // Update Google login function with hosted backend URL
-//   const googleLogin = () => {
-//     window.open('https://sfbs-backend.vercel.app/api/v1/auth/google', '_self');
+//     login(data.email, data.password,  toast);
 //   };
 
 //   return (
@@ -173,13 +186,30 @@ export default connect(null, { login })(Login);
 //               <h2 className="text-xl font-bold mb-3 text-center">Login</h2>
 //               <p className="text-center mb-3 text-sm">Please login to continue</p>
 //               <form onSubmit={handleSubmit(onSubmit)}>
+//                 {/* <div className="mb-4 relative">
+//                   <label className="block text-sm mb-1 font-normal">Select Role</label>
+//                   <select
+//                     {...register("role")}
+//                     className={`w-full px-3 py-2 border ${
+//                       errors.role ? 'border-red-500' : 'border-gray-300'
+//                     } rounded-md focus:outline-none focus:ring-2 focus:ring-slate-200`}
+//                   >
+//                     <option value="">Select Role</option>
+//                     <option value="User">User</option>
+//                     <option value="Coach">Coach</option>
+//                   </select>
+//                   {errors.role && (
+//                     <p className="absolute text-red-500 text-xs mt-0">{errors.role.message}</p>
+//                   )}
+//                 </div> */}
 //                 <div className="mb-4 relative">
 //                   <label className="block text-sm mb-1 font-normal">Email Address</label>
 //                   <input
 //                     type="email"
 //                     {...register("email")}
-//                     className={`w-full px-3 py-2 border ${errors.email ? 'border-red-500' : 'border-gray-300'
-//                       } rounded-md focus:outline-none focus:ring-2 focus:ring-slate-200`}
+//                     className={`w-full px-3 py-2 border ${
+//                       errors.email ? 'border-red-500' : 'border-gray-300'
+//                     } rounded-md focus:outline-none focus:ring-2 focus:ring-slate-200`}
 //                     placeholder="Email Address"
 //                   />
 //                   {errors.email && (
@@ -191,8 +221,9 @@ export default connect(null, { login })(Login);
 //                   <input
 //                     type="password"
 //                     {...register("password")}
-//                     className={`w-full px-3 py-2 border ${errors.password ? 'border-red-500' : 'border-gray-300'
-//                       } rounded-md focus:outline-none focus:ring-2 focus:ring-slate-200`}
+//                     className={`w-full px-3 py-2 border ${
+//                       errors.password ? 'border-red-500' : 'border-gray-300'
+//                     } rounded-md focus:outline-none focus:ring-2 focus:ring-slate-200`}
 //                     placeholder="Password"
 //                   />
 //                   {errors.password && (
@@ -205,22 +236,19 @@ export default connect(null, { login })(Login);
 //                 >
 //                   LOGIN
 //                 </button>
+//                 <div className="flex justify-center mt-3">
+//                   <button className="flex items-center justify-center w-full bg-white text-gray-600 border border-gray-300 py-1.5 rounded-md shadow hover:bg-gray-100">
+//                     <img src={googleLogo} alt="Google logo" className="h-5 mr-2" />
+//                     <span className="font-medium">Sign in with Google</span>
+//                   </button>
+//                 </div>
+//                 <p className="mt-3 text-center text-sm">
+//                   New User?{' '}
+//                   <Link to="/register" className="text-teal-600 hover:underline">
+//                     Create Account
+//                   </Link>
+//                 </p> 
 //               </form>
-//               <div className="flex justify-center mt-3">
-//                 <button
-//                   onClick={googleLogin}
-//                   className="flex items-center justify-center w-full bg-white text-gray-600 border border-gray-300 py-1.5 rounded-md shadow hover:bg-gray-100"
-//                 >
-//                   <img src={googleLogo} alt="Google logo" className="h-5 mr-2" />
-//                   <span className="font-medium">Sign in with Google</span>
-//                 </button>
-//               </div>
-//               <p className="mt-3 text-center text-sm">
-//                 New User?{' '}
-//                 <Link to="/register" className="text-teal-600 hover:underline">
-//                   Create Account
-//                 </Link>
-//               </p>
 //             </div>
 //           </div>
 //         </div>
