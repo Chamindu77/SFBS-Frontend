@@ -30,7 +30,7 @@ const Login = ({ login }) => {
   };
 
   const googleLogin = () => {
-    window.open('http://localhost:5000/api/v1/auth/google', '_self');
+    window.open('https://sfbs-backend.vercel.app/api/v1/auth/google', '_self');
   };
 
   return (
