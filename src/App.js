@@ -23,6 +23,7 @@ import AdminCoachManagement from './components/Admin/AdminCoachProfileManagement
 import AdminCoachProfileManagement from './components/Admin/AdminCoachProfileManagement/CoachProfile/CoachProfilePage';
 import FacilityManagement from './components/Admin/FacilityPage/SportCategoryPage';
 import EquipmentManagement from './components/Admin/EquipmentPage/EquipmentPage';
+import GoogleAuthRedirect from './components/User/GoogleAuthRedirect';
 
 const App = () => {
   return (
@@ -32,6 +33,8 @@ const App = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/register" element={<Registration />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/auth/google/callback" element={<GoogleAuthRedirect />} />
+
 
           <Route path="/equipment" element={
             <ProtectedRoute>
