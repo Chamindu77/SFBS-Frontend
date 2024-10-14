@@ -1,62 +1,72 @@
 
+
 import React, { useState } from 'react';
 import axios from 'axios';
-import { toast } from 'react-toastify'; // Import toast
+import { toast } from 'react-toastify';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 const EquipmentModal = ({ equipment, isOpen, onClose, onSave }) => {
-  const [equipmentName, setEquipmentName] = useState(equipment?.equipmentName || '');
-  const [sportName, setSportName] = useState(equipment?.sportName || '');
-  const [rentPrice, setRentPrice] = useState(equipment?.rentPrice || '');
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(equipment?.image || '');
 
-  const handleImageUpload = (e) => {
+  // Validation schema for Equipment Modal
+  const validationSchema = Yup.object().shape({
+    equipmentName: Yup.string().required('This field is required'),
+    sportName: Yup.string().required('This field is required'),
+    rentPrice: Yup.number().required('This field is required'),
+    image: Yup.mixed()
+      .required('Image is required')
+      .test('fileSize', 'File size is too large', (value) => !value || (value && value.size <= 2 * 1024 * 1024)) // 2MB max
+      .test('fileType', 'Unsupported file format', (value) =>
+        !value || (value && ['image/jpeg', 'image/png', 'image/jpg'].includes(value.type))
+      ),
+  });
+
+  const handleImageUpload = (e, setFieldValue) => {
     const file = e.target.files[0];
     setImageFile(file);
+    setFieldValue('image', file); // Update Formik field value for 'image'
+
     const reader = new FileReader();
     reader.onloadend = () => setImagePreview(reader.result);
     if (file) reader.readAsDataURL(file);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (values, { setSubmitting }) => {
+    const formData = new FormData();
+    formData.append('equipmentName', values.equipmentName);
+    formData.append('sportName', values.sportName);
+    formData.append('rentPrice', values.rentPrice);
+    if (imageFile) formData.append('image', imageFile);
 
     try {
       const token = localStorage.getItem('token');
-      const formData = new FormData();
-      formData.append('equipmentName', equipmentName);
-      formData.append('sportName', sportName);
-      formData.append('rentPrice', rentPrice);
-      if (imageFile) {
-        formData.append('image', imageFile);
-      }
-
+      let response;
       if (equipment?._id) {
         // Update existing equipment
-        await axios.put(`https://sfbs-backend.vercel.app/api/v1/equipment/${equipment._id}`, formData, {
-          headers: { 'Content-Type': 'multipart/form-data', 'x-auth-token': token }
+        response = await axios.put(`http://sfbs-backend.vercel.app/api/v1/equipment/${equipment._id}`, formData, {
+          headers: { 'Content-Type': 'multipart/form-data', 'x-auth-token': token },
         });
-        toast.success('Equipment updated successfully!'); // Success toast for update
+        toast.success('Equipment updated successfully!');
       } else {
         // Create new equipment
-        await axios.post('https://sfbs-backend.vercel.app/api/v1/equipment', formData, {
-          headers: { 'Content-Type': 'multipart/form-data', 'x-auth-token': token }
+        response = await axios.post('http://sfbs-backend.vercel.app/api/v1/equipment', formData, {
+          headers: { 'Content-Type': 'multipart/form-data', 'x-auth-token': token },
         });
-        toast.success('Equipment created successfully!'); // Success toast for create
+        toast.success('Equipment created successfully!');
       }
 
-      onSave();
-
+      onSave(response.data);
       setTimeout(() => {
-        onClose(); 
+        onClose();
         window.location.reload();
-      }, 1000); 
-      //window.location.reload();
-      // onClose();
-      // window.location.reload(); // Refresh after action
+      }, 2000);
     } catch (error) {
-      toast.error(`Error saving equipment: ${error.message}`); // Error toast for save
+      toast.error(`Error saving equipment: ${error.message}`);
     }
+
+    setSubmitting(false);
   };
 
   if (!isOpen) return null;
@@ -67,83 +77,108 @@ const EquipmentModal = ({ equipment, isOpen, onClose, onSave }) => {
         <h2 className="text-lg font-bold mb-2">
           {equipment?.equipmentName ? 'Update Equipment Details' : 'Add New Equipment'}
         </h2>
-        <form onSubmit={handleSubmit} className="space-y-2">
-          {/* Equipment Name */}
-          <div className="flex items-center mb-2">
-            <label className="text-gray-700 w-1/3">Equipment Name:</label>
-            <input
-              type="text"
-              value={equipmentName}
-              onChange={(e) => setEquipmentName(e.target.value)}
-              className="w-2/3 p-1 border border-gray-300 rounded"
-              required
-            />
-          </div>
 
-          {/* Sport Name */}
-          <div className="flex items-center mb-2">
-            <label className="text-gray-700 w-1/3">Sport Name:</label>
-            <input
-              type="text"
-              value={sportName}
-              onChange={(e) => setSportName(e.target.value)}
-              className="w-2/3 p-1 border border-gray-300 rounded"
-              required
-            />
-          </div>
+        <Formik
+          initialValues={{
+            equipmentName: equipment?.equipmentName || '',
+            sportName: equipment?.sportName || '',
+            rentPrice: equipment?.rentPrice || '',
+            image: null,
+          }}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ setFieldValue, isSubmitting }) => (
+            <Form className="space-y-2">
+              {/* Equipment Name */}
+              <div className="mb-2">
+                <div className="flex items-center">
+                  <label className="text-gray-700 w-1/3">Equipment Name:</label>
+                  <div className="w-2/3">
+                    <Field
+                      type="text"
+                      name="equipmentName"
+                      className="w-full p-1 border border-gray-300 rounded"
+                    />
+                    <ErrorMessage name="equipmentName" component="div" className="text-red-600 text-xs mt-1" />
+                  </div>
+                </div>
+              </div>
 
-          {/* Rent Price */}
-          <div className="flex items-center mb-2">
-            <label className="text-gray-700 w-1/3">Rent Price (Rs):</label>
-            <input
-              type="number"
-              value={rentPrice}
-              onChange={(e) => setRentPrice(e.target.value)}
-              className="w-1/3 p-1 border border-gray-300 rounded"
-              required
-            />
-          </div>
+              {/* Sport Name */}
+              <div className="mb-2">
+                <div className="flex items-center">
+                  <label className="text-gray-700 w-1/3">Sport Name:</label>
+                  <div className="w-2/3">
+                    <Field
+                      type="text"
+                      name="sportName"
+                      className="w-full p-1 border border-gray-300 rounded"
+                    />
+                    <ErrorMessage name="sportName" component="div" className="text-red-600 text-xs mt-1" />
+                  </div>
+                </div>
+              </div>
 
-          {/* Image Upload */}
-          <div className="flex items-center mb-2">
-            <label className="text-gray-700 w-1/3">Upload Image:</label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageUpload}
-              className="w-2/3 p-1 border border-gray-300 rounded"
-            />
-          </div>
+              {/* Rent Price */}
+              <div className="mb-2">
+                <div className="flex items-center">
+                  <label className="text-gray-700 w-1/3">Rent Price (Rs):</label>
+                  <div className="w-1/3">
+                    <Field
+                      type="number"
+                      name="rentPrice"
+                      className="w-full p-1 border border-gray-300 rounded"
+                    />
+                    <ErrorMessage name="rentPrice" component="div" className="text-red-600 text-xs mt-1" />
+                  </div>
+                </div>
+              </div>
 
-          {/* Image Preview */}
-          {imagePreview && (
-            <div className="mb-2">
-              <label className="block text-gray-700 mb-1">Image Preview</label>
-              <img
-                src={imagePreview}
-                alt="Selected equipment"
-                className="w-full h-32 object-cover rounded-lg"
-              />
-            </div>
+              {/* Image Upload */}
+              <div className="mb-2">
+                <div className="flex items-center">
+                  <label className="text-gray-700 w-1/3">Upload Image:</label>
+                  <div className="w-2/3">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => handleImageUpload(e, setFieldValue)}
+                      className="w-full p-1 border border-gray-300 rounded"
+                    />
+                    <ErrorMessage name="image" component="div" className="text-red-600 text-xs mt-1" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Image Preview */}
+              {imagePreview && (
+                <div className="mb-2">
+                  <label className="block text-gray-700 mb-1">Image Preview</label>
+                  <img src={imagePreview} alt="Selected equipment" className="w-full h-32 object-cover rounded-lg" />
+                </div>
+              )}
+
+              {/* Action Buttons */}
+              <div className="flex justify-end space-x-2 pt-4">
+                <button
+                  type="button"
+                  className="bg-red-500 text-white py-2 px-3 rounded-lg hover:bg-red-700"
+                  onClick={onClose}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="bg-teal-700 text-white py-2 px-3 rounded-lg hover:bg-teal-800"
+                  disabled={isSubmitting}
+                >
+                  {equipment?.equipmentName ? 'Save Changes' : 'Create Equipment'}
+                </button>
+              </div>
+            </Form>
           )}
-
-          {/* Action buttons */}
-          <div className="flex justify-end space-x-2 pt-4">
-            <button
-              type="button"
-              className="bg-red-500 text-white py-2 px-3 rounded-lg hover:bg-red-700"
-              onClick={onClose}
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="bg-teal-700 text-white py-2 px-3 rounded-lg hover:bg-teal-800"
-            >
-              {equipment?.equipmentName ? 'Save Changes' : 'Create Equipment'}
-            </button>
-          </div>
-        </form>
+        </Formik>
       </div>
     </div>
   );
