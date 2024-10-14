@@ -30,7 +30,7 @@ const Footer = () => {
                         </ul>
                     </div>
                     <div>
-                        <h3 className="text-lg font-semibold mb-3 text-slate-200">Company</h3>
+                        <h3 className="text-lg font-semibold mb-3 text-slate-200">Our Pages</h3>
                         <ul className="space-y-2">
                             <li><Link to="/" className="hover:underline text-slate-300">Home Page</Link></li>
                             <li><Link to="/about" className="hover:underline text-slate-300">About Us</Link></li>
