@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Footer from '../../Layout/Footer';
+import AdminFooter from '../../Layout/AdminFooter';
 import AdminNavbar from '../../Layout/AdminNavbar';
 import SportsList from './SportsList';
 import FacilityModal from './FacilityModal';
@@ -135,7 +135,7 @@ const SportCategoryPage = () => {
           </>
         )}
       </div>
-      <Footer />
+      <AdminFooter />
 
       <ToastContainer />
 

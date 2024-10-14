@@ -3,7 +3,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCoachProfiles } from '../../../redux/actions/coachActions';
 import AdminNavbar from '../../Layout/AdminNavbar';
-import Footer from '../../Layout/Footer';
+import AdminFooter from '../../Layout/AdminFooter';
 import CoachCard from './CoachCard'; 
 import FilterSection from './FilterSection'; 
 import axios from 'axios';  
@@ -128,7 +128,7 @@ const CoachPage = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      <AdminFooter />
     </div>
   );
 };

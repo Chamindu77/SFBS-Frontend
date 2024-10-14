@@ -22,19 +22,21 @@ const Footer = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     <div>
-                        <h3 className="text-lg font-semibold mb-3 text-slate-200">Our Services</h3>
+                        <h3 className="text-lg font-semibold mb-3 text-slate-200">Dreamsport Services</h3>
                         <ul className="space-y-2">
-                            <li><Link to="/sportcategory" className="hover:underline text-slate-300">Facility Booking</Link></li>
-                            <li><Link to="/equipment" className="hover:underline text-slate-300">Equipment Booking</Link></li>
-                            <li><Link to="/coach-page" className="hover:underline text-slate-300">Session Booking</Link></li>
+                            <li className=" text-slate-300">Facility Booking </li>
+                            <li className=" text-slate-300">Equipment Booking</li>
+                            <li className=" text-slate-300">Session Booking</li>
+                            <li className=" text-slate-300">Coaches Booking</li>
                         </ul>
                     </div>
                     <div>
-                        <h3 className="text-lg font-semibold mb-3 text-slate-200">Company</h3>
+                        <h3 className="text-lg font-semibold mb-3 text-slate-200">Admin Pages</h3>
                         <ul className="space-y-2">
-                            <li><Link to="/" className="hover:underline text-slate-300">Home Page</Link></li>
-                            <li><Link to="/about" className="hover:underline text-slate-300">About Us</Link></li>
-                            <li><Link to="/about" className="hover:underline text-slate-300">Our Teams</Link></li>
+                            <li><Link to="/user-managment" className="hover:underline text-slate-300">Users Management</Link></li>
+                            <li><Link to="/Coaches-managment" className="hover:underline text-slate-300">Coaches Management</Link></li>
+                            <li><Link to="/facility-managment" className="hover:underline text-slate-300">Facility Management</Link></li>
+                            <li><Link to="/equipment-managment" className="hover:underline text-slate-300">Equipment Management</Link></li>
                         </ul>
                     </div>
                     <div>
@@ -43,11 +45,12 @@ const Footer = () => {
                             <li className="text-slate-300">Galle, Sri Lanka</li>
                             <li><a href="mailto:info@dreamsport.com" className='text-slate-300'>info@dreamsport.com</a></li>
                             <li className="text-slate-300">077 123 4567</li>
+                            <li className="text-slate-300">077 123 4567</li>
                         </ul>
                     </div>
                     <div>
                         <h3 className="text-lg font-semibold mb-1 text-slate-200">Subscribe</h3>
-                        <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row items-center mb-4">
+                        <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row items-center mb-4 mt-2">
                             <input 
                                 type="email" 
                                 placeholder="Enter your email address" 
@@ -62,8 +65,8 @@ const Footer = () => {
                                 Subscribe
                             </button>
                         </form>
-                        <h3 className="text-lg font-semibold text-slate-200">Follow Us</h3>
-                        <div className="flex space-x-4 text-xl">
+                        <h3 className="text-lg font-semibold mt-4 text-slate-200">Follow Us</h3>
+                        <div className="flex space-x-4 text-xl mt-2">
                             <a href="https://www.facebook.com" className="hover:text-teal-500">
                                 <i className="fab fa-facebook-f"></i>
                             </a>

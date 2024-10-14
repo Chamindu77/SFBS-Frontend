@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { FaPlay, FaPowerOff } from 'react-icons/fa'
 import axios from 'axios'
-import Footer from '../../Layout/Footer'
+import AdminFooter from '../../Layout/AdminFooter'
 import AdminNavbar from '../../Layout/AdminNavbar'
 
 const Requests = () => {
@@ -147,7 +147,7 @@ const Requests = () => {
           </table>
         </div>
       </div>
-      <Footer />
+      <AdminFooter />
     </div>
   )
 }

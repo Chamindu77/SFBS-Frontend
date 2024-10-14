@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { fetchAvailableEquipment } from '../../../redux/actions/equipmentActions';
-import Footer from '../../Layout/Footer';
+import AdminFooter from '../../Layout/AdminFooter';
 import EquipmentList from './EquipmentList';
 import AdminNavbar from '../../Layout/AdminNavbar';
 import EquipmentModal from './EquipmentModal';
@@ -106,7 +106,7 @@ const EquipmentPage = ({ fetchAvailableEquipment, availableEquipment }) => {
           <EquipmentList filteredEquipment={filteredEquipment} />
         </div>
       </div>
-      <Footer />
+      <AdminFooter />
 
       {/* Global ToastContainer for displaying toast messages */}
       <ToastContainer />
