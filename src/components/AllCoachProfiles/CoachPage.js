@@ -1,3 +1,4 @@
+// 
 import React, { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -24,6 +25,7 @@ const CoachPage = () => {
   useEffect(() => {
     setFilteredCoaches(
       coaches.filter(coach =>
+        coach.isActive === true &&  // Ensure the coach is active
         (coachingSportFilter ? coach.coachingSport === coachingSportFilter : true) &&
         (coachLevelFilter ? coach.coachLevel === coachLevelFilter : true)
       )
@@ -38,7 +40,7 @@ const CoachPage = () => {
   const handleReset = () => {
     setCoachingSportFilter('');
     setCoachLevelFilter('');
-    setFilteredCoaches(coaches);
+    setFilteredCoaches(coaches.filter(coach => coach.isActive === true)); // Ensure only active coaches are displayed on reset
   };
 
   const uniqueCoachingSports = useMemo(() => [...new Set(coaches.map(coach => coach.coachingSport))], [coaches]);
@@ -88,7 +90,7 @@ const CoachPage = () => {
               ))
             ) : (
               <div className="text-center text-gray-700">
-                <p>No coaches found for the selected filters.</p>
+                <p>No Coaches Available.</p>
               </div>
             )}
           </div>
