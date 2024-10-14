@@ -88,7 +88,7 @@ const CoachPage = () => {
               ))
             ) : (
               <div className="text-center text-gray-700">
-                <p>No Coaches Available.</p>
+                <p>No coaches found for the selected filters.</p>
               </div>
             )}
           </div>
